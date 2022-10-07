@@ -1,0 +1,8 @@
+const Button = ({children , onClick}) => {
+	return (
+		<button className = "bg-indigo-600 cursor-pointer text-white py-2 px-6 my-10 rounded hover:bg-indigo-700" onClick={onClick} >
+          {children}
+		</button>
+	)
+}
+export default Button
