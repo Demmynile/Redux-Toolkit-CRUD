@@ -2,14 +2,27 @@ import React from 'react'
 import Button from "../../components/Button"
 import TextField from "../../components/TextField"
 import {useState} from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate  , useParams} from "react-router-dom"
+import { useSelector } from 'react-redux'
 
 const EditUser = () => {
 	const navigate = useNavigate()
+	
+	const params = useParams()
+	console.log(params.id)
+
+	const users = useSelector(store => store.users)
+	console.log(users)
+
+
+	const existingUser = users.filter(user => user.id === params.id)
+	const {name , email} = existingUser[0]
+
+
 
 	const [values , setValues] = useState({
-		name : '',
-		email : ''
+		name : name,
+		email : email
 	})
 	const handleEditUser = () => {
 		setValues({name : '' , email : ''})
