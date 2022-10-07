@@ -3,13 +3,16 @@ import Button from "../../components/Button"
 import TextField from "../../components/TextField"
 import {useState} from 'react'
 import { useNavigate  , useParams} from "react-router-dom"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { editUser } from './UserSlice'
 
 const EditUser = () => {
 	const navigate = useNavigate()
-	
+
 	const params = useParams()
 	console.log(params.id)
+
+	const dispatch = useDispatch();
 
 	const users = useSelector(store => store.users)
 	console.log(users)
@@ -21,11 +24,16 @@ const EditUser = () => {
 
 
 	const [values , setValues] = useState({
-		name : name,
-		email : email
+		name,
+		email
 	})
 	const handleEditUser = () => {
 		setValues({name : '' , email : ''})
+		dispatch(editUser({
+			id : params.id,
+			name : values.name,
+			email : values.email
+		}))
 		navigate("/")
 	}
 	return (
